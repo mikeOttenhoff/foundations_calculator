@@ -41,7 +41,13 @@ button {
 .calculator_display {
   width: 100%;
   height: 10rem;
-  background-color: blue;
+  background-color: rgba(12, 12, 12, 0.1);
+  padding: 1rem;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-family: "Fira Code", monospace;
+  font-size: 3rem;
 }
 .calculator_buttons {
   width: 100%;
@@ -71,8 +77,6 @@ button {
 }
 
 .button {
-  width: 10rem;
-  height: 10rem;
   background-color: beige;
   border-radius: 1rem;
   font-size: 3rem;
