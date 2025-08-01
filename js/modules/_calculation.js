@@ -19,6 +19,8 @@ export const calculation = function () {
   const btnMultiply = document.querySelector(".multiply");
   const btnDivide = document.querySelector(".divide");
   const btnClear = document.querySelector(".clear");
+  const decimalInput = document.querySelector(".decimalInput");
+  let decimalPlaces = 2;
 
   // context
   btn1.textContent = 1;
@@ -63,14 +65,28 @@ export const calculation = function () {
   };
   clearScreen();
 
+  //still in the works
+  // const setDecimal = function () {
+  //   decimalInput.addEventListener("keyup", function (e) {
+  //     const key = e.key;
+
+  //     if (/^\d$/.test(key)) {
+  //       const keyNumber = parseInt(key, 10);
+  //       decimalPlaces = keyNumber;
+  //       console.log("Decimal places set to:", decimalPlaces);
+  //     } else {
+  //       console.log("Ignored key:", key);
+  //     }
+  //   });
+  // };
+  // setDecimal();
+
   const solveMath = function () {
     btnEqual.addEventListener("click", function (e) {
       e.preventDefault();
       display.textContent = "";
       const expression = typed.join("");
-
       const number1 = expression.split(/[+\-*/]/)[0];
-
       const number2 = expression.split(/[+\-*/]/)[1];
       const operatorIndex = expression.search(/[+\-*/]/);
       const operator = expression[operatorIndex];
@@ -89,8 +105,13 @@ export const calculation = function () {
         result = firstNumber / secondNumber;
       }
 
-      console.log(result);
-      display.textContent = result;
+      if (isNaN(result)) {
+        alert("Use a number, an operator and a number");
+        return;
+      }
+
+      display.textContent = parseFloat(result.toFixed(decimalPlaces));
+      typed = [result.toString()];
     });
   };
   solveMath();
