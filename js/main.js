@@ -18,8 +18,7 @@ const btnSubtract = document.querySelector(".subtract");
 const btnMultiply = document.querySelector(".multiply");
 const btnDivide = document.querySelector(".divide");
 const btnClear = document.querySelector(".clear");
-const decimalInput = document.querySelector(".decimalInput");
-let decimalPlaces = 2;
+const operatorRegex = /[+\-*/]/;
 
 // context
 btn1.textContent = 1;
@@ -39,19 +38,62 @@ btnSubtract.textContent = "-";
 btnMultiply.textContent = "*";
 btnDivide.textContent = "/";
 
+//calculations
+const add = function (num1, num2) {
+  return num1 + num2;
+};
+
+const subtract = function (num1, num2) {
+  return num1 - num2;
+};
+
+const times = function (num1, num2) {
+  return num1 * num2;
+};
+
+const divided = function (num1, num2) {
+  return num1 / num2;
+};
+
 //Button Press
 let typed = [];
+let operatorArr = [];
 
 const btnPress = function () {
   for (let i = 0; i < btn.length; i++) {
     btn[i].addEventListener("click", function () {
+      const value = this.textContent;
+
       if (this !== btnClear && this !== btnEqual) {
-        typed.push(this.textContent);
+        if (value.match(operatorRegex)) {
+          operatorArr.push(value);
+
+          const expression = typed.join("");
+          const tokens = expression.match(/(\d+\.?\d*|\.\d+|[+\-*/])/g);
+
+          if (tokens && tokens.length >= 3) {
+            const result = solveMath();
+
+            if (result !== null) {
+              typed = [result.toString(), value];
+              display.textContent = typed.join("");
+              operatorArr = [value];
+              return;
+            } else {
+              return;
+            }
+          }
+        } else {
+          operatorArr = [];
+        }
+
+        typed.push(value);
         display.textContent = typed.join("");
       }
     });
   }
 };
+
 btnPress();
 
 // The clear button clears out the typed array
@@ -64,37 +106,46 @@ const clearScreen = function () {
 };
 clearScreen();
 
-const solveMath = function () {
-  btnEqual.addEventListener("click", function (e) {
-    e.preventDefault();
-    display.textContent = "";
-    const expression = typed.join("");
-    const number1 = expression.split(/[+\-*/]/)[0];
-    const number2 = expression.split(/[+\-*/]/)[1];
-    const operatorIndex = expression.search(/[+\-*/]/);
-    const operator = expression[operatorIndex];
-    const firstNumber = parseFloat(number1);
-    const secondNumber = parseFloat(number2);
+function solveMath() {
+  const expression = typed.join("");
+  const tokens = expression.match(/(\d+\.?\d*|\.\d+|[+\-*/])/g);
 
-    let result;
+  if (!tokens || tokens.length < 3) return null;
 
-    if (operator === "+") {
-      result = firstNumber + secondNumber;
-    } else if (operator === "-") {
-      result = firstNumber - secondNumber;
-    } else if (operator === "*") {
-      result = firstNumber * secondNumber;
-    } else if (operator === "/") {
-      result = firstNumber / secondNumber;
-    }
+  const number1 = tokens[0];
+  const operator = tokens[1];
+  const number2 = tokens[2];
+  const firstNumber = parseFloat(number1);
+  const secondNumber = parseFloat(number2);
+  let result;
 
-    if (isNaN(result)) {
-      alert("Use a number, an operator and a number");
-      return;
-    }
+  if (operator === "+") {
+    result = add(firstNumber, secondNumber);
+  } else if (operator === "-") {
+    result = subtract(firstNumber, secondNumber);
+  } else if (operator === "*") {
+    result = times(firstNumber, secondNumber);
+  } else if (operator === "/") {
+    result = divided(firstNumber, secondNumber);
+  }
 
-    display.textContent = parseFloat(result.toFixed(decimalPlaces));
+  if (isNaN(result)) {
+    alert(
+      "Use a number, an operator and a number and keep your numbers positive"
+    );
+    return null;
+  }
+
+  return parseFloat(result.toFixed(3));
+}
+
+//Button to operate the equal to button
+btnEqual.addEventListener("click", function (e) {
+  e.preventDefault();
+  const result = solveMath();
+
+  if (result !== null) {
+    display.textContent = result;
     typed = [result.toString()];
-  });
-};
-solveMath();
+  }
+});
