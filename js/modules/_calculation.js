@@ -21,9 +21,6 @@ export const calculation = function () {
   const btnClear = document.querySelector(".clear");
   const decimalInput = document.querySelector(".decimalInput");
   let decimalPlaces = 2;
-  const test = "test";
-
-  console.log(test);
 
   // context
   btn1.textContent = 1;
@@ -67,22 +64,6 @@ export const calculation = function () {
     });
   };
   clearScreen();
-
-  // still in the works
-  // const setDecimal = function () {
-  //   decimalInput.addEventListener("keyup", function (e) {
-  //     const key = e.key;
-
-  //     if (/^\d$/.test(key)) {
-  //       const keyNumber = parseInt(key, 10);
-  //       decimalPlaces = keyNumber;
-  //       console.log("Decimal places set to:", decimalPlaces);
-  //     } else {
-  //       console.log("Ignored key:", key);
-  //     }
-  //   });
-  // };
-  // setDecimal();
 
   const solveMath = function () {
     btnEqual.addEventListener("click", function (e) {
