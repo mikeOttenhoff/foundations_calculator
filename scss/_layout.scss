@@ -1,5 +1,11 @@
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .calculator {
-  max-width: 500px;
+  width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,6 +13,7 @@
   background-color: #232326;
   padding: 3rem;
   border-radius: 3rem;
+  box-shadow: 2rem 2rem 0rem rgba(0, 0, 0, 0.3);
   &_display {
     width: 100%;
     height: 10rem;

@@ -30,8 +30,15 @@ button,
   outline: inherit;
 }
 
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .calculator {
-  max-width: 500px;
+  width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,6 +46,7 @@ button,
   background-color: #232326;
   padding: 3rem;
   border-radius: 3rem;
+  box-shadow: 2rem 2rem 0rem rgba(0, 0, 0, 0.3);
 }
 .calculator_display {
   width: 100%;

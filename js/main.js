@@ -134,9 +134,7 @@ function solveMath() {
   }
 
   if (isNaN(result)) {
-    alert(
-      "Use a number, an operator and a number and keep your numbers positive"
-    );
+    alert("Use a number, an operator and a number. Keep your sums positive");
     return null;
   }
 
