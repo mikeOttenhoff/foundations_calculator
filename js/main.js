@@ -18,7 +18,9 @@ const btnSubtract = document.querySelector(".subtract");
 const btnMultiply = document.querySelector(".multiply");
 const btnDivide = document.querySelector(".divide");
 const btnClear = document.querySelector(".clear");
+const btnDelete = document.querySelector(".delete");
 const operatorRegex = /[+\-*/]/;
+let resultJustDisplayed = false;
 
 // context
 btn1.textContent = 1;
@@ -64,7 +66,9 @@ const btnPress = function () {
     btn[i].addEventListener("click", function () {
       const value = this.textContent;
 
-      if (this !== btnClear && this !== btnEqual) {
+      if (this !== btnClear && this !== btnEqual && this !== btnDelete) {
+        resultJustDisplayed = false;
+
         if (value.match(operatorRegex)) {
           operatorArr.push(value);
 
@@ -147,5 +151,19 @@ btnEqual.addEventListener("click", function (e) {
   if (result !== null) {
     display.textContent = result;
     typed = [result.toString()];
+    resultJustDisplayed = true;
+  }
+});
+
+btnDelete.addEventListener("click", function (e) {
+  e.preventDefault();
+  if (resultJustDisplayed) return;
+  if (typed.length > 0) {
+    const removed = typed.pop("");
+
+    if (operatorRegex.test(removed)) {
+      operatorArr.pop();
+    }
+    display.textContent = typed.join("");
   }
 });

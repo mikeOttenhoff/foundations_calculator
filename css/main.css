@@ -71,6 +71,7 @@ button,
 }
 .calculator_buttons .buttonEqual {
   grid-column: 1/-1;
+  margin: auto 1rem;
 }
 .calculator_buttons_rest {
   width: 100%;
@@ -81,17 +82,29 @@ button,
   align-items: center;
   gap: 1rem;
 }
+.calculator_buttons_rest .button {
+  background-color: #333336;
+}
 
 .button {
   background-color: #585859;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   font-size: 3rem;
   font-weight: 700;
   color: #b9bfb4;
-  box-shadow: inset 0rem 0rem 1rem #686868;
 }
 
 .decimalInput {
   width: 100%;
   text-align: center;
+}
+
+.delete {
+  background-color: #bb3727;
+  font-size: 3rem;
+}
+
+.button.clear {
+  background-color: #bb3727;
+  font-size: 3rem;
 }

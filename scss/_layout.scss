@@ -31,7 +31,6 @@
     justify-content: center;
     align-items: center;
     &_numbers {
-      // background-color: orange;
       padding: 1rem;
       display: grid;
       height: 100%;
@@ -42,16 +41,19 @@
     }
     .buttonEqual {
       grid-column: 1/-1;
+      margin: auto 1rem;
     }
     &_rest {
       width: 100%;
       padding: 1rem;
-      // background-color: green;
       display: grid;
       grid-template-columns: repeat(1, 1fr);
       justify-content: center;
       align-items: center;
       gap: 1rem;
+      .button {
+        background-color: #333336;
+      }
     }
   }
 }
@@ -61,13 +63,21 @@
   // width: 10rem;
   // height: 10rem;
   background-color: #585859;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   font-size: 3rem;
   font-weight: 700;
   color: #b9bfb4;
-  box-shadow: inset 0rem 0rem 1rem #686868;
+  // box-shadow: inset 0rem 0rem 1rem #686868;
 }
 .decimalInput {
   width: 100%;
   text-align: center;
+}
+.delete {
+  background-color: #bb3727;
+  font-size: 3rem;
+}
+.button.clear {
+  background-color: #bb3727;
+  font-size: 3rem;
 }
